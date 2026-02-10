@@ -1,0 +1,17 @@
+services:
+  velociraptor:
+    container_name: velociraptor
+    image: wlambert/velociraptor
+    volumes:
+      - ./velociraptor:/velociraptor/:rw
+    environment:
+      - VELOX_USER=admin
+      - VELOX_PASSWORD=admin
+      - VELOX_ROLE=administrator
+      - VELOX_SERVER_URL=https://VelociraptorServer:8000/
+      - VELOX_FRONTEND_HOSTNAME=VelociraptorServer
+    ports:
+      - "9000:8000"   # Client/ingest frontend
+      - "9001:8001"   # gRPC API  <-- MCP server connects here
+      - "9889:8889"   # Web GUI
+    restart: unless-stopped
