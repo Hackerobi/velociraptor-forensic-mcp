@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "velociraptor-forensic-mcp"
+version = "0.1.0"
+description = "Unified MCP server combining Velociraptor DFIR with local forensic analysis tools"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [
+    {name = "Hackerobi"},
+]
+keywords = ["velociraptor", "mcp", "llm", "dfir", "forensics", "incident-response"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: System :: Monitoring",
+]
+
+dependencies = [
+    "mcp>=1.9.3,<2.0.0",
+    "pydantic>=2.7",
+    "PyYAML>=6.0",
+    "python-dotenv>=1.0.0",
+    "grpcio>=1.50.0",
+    "grpcio-tools>=1.50.0",
+    "pyvelociraptor>=0.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.21",
+    "pytest-cov>=4.0",
+    "black>=24.0",
+    "ruff>=0.4",
+    "mypy>=1.0",
+]
+
+[project.scripts]
+velociraptor-forensic-mcp = "velociraptor_forensic_mcp.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["velociraptor_forensic_mcp*"]
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
